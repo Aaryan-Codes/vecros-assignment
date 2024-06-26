@@ -1,4 +1,4 @@
-#Project: Blog Application for Vecros Recruitment
+# Project: Blog Application for Vecros Recruitment
 
 This project is a fully functional blog application developed using React.js, completed as part of a recruitment assignment for Vecros. The application offers a seamless user experience with the following features:
 <ul>
