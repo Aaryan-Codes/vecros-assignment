@@ -81,10 +81,12 @@ const Header = ({ darkMode, setDarkMode }) => {
             sx={{
               flexGrow: 1,
               display: { sm: "block" },
-              textAlign: { xs: "right", sm: "left" },
+              textAlign: { xs: "right",md:"left" ,sm: "right" },
+              display:"flex",
+              alignItems:"center"
             }}
           >
-            <Typography variant="h5" sx={{display:"flex",alignItems:"center"}}>BLOGGER <BookIcon/></Typography>
+            BLOGGER <BookIcon/>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <Button

@@ -1,5 +1,5 @@
 import { TextField, Button, Grid, Typography} from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPost,setAlertMessage,setAlertStatus } from "../../redux/reducers/blogReducers";
 import ReactQuill from "react-quill";
@@ -56,6 +56,10 @@ const CreateBlog = () => {
     },3000);
     navigate('/');
   };
+
+  useEffect(()=>{
+     document.title = "Create Blog";
+  },[])
 
   return (
     <>

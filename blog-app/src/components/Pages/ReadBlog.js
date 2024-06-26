@@ -1,9 +1,15 @@
 import ReactQuill, { Quill } from "react-quill";
 import { useSelector } from "react-redux";
 import "react-quill/dist/quill.snow.css";
+import { useEffect } from "react";
 
 const ReadBlog = () => {
   const readTile = useSelector((state) => state.tileReducer.readTile);
+
+  useEffect(()=>{
+    document.title=readTile.title;
+  },[])
+
   return (
     <>
       <div className="mt-[64px] p-10 flex flex-col text-center items-center">

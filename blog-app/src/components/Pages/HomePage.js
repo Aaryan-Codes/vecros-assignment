@@ -3,12 +3,17 @@ import { Link } from "react-router-dom";
 import BlogTile from "../Layout/BlogTile";
 import { Alert } from "@mui/material";
 import { setSampleData } from "../../redux/reducers/blogReducers";
+import { useEffect } from "react";
 
 const HomePage = () => {
   const blogsData = useSelector((state) => state.blogReducer.blogs);
   const alertStatus = useSelector((state)=>state.blogReducer.alertStatus);
   const alertMessage = useSelector((state)=>state.blogReducer.alertMessage);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    document.title="Blog Feed"
+  },[])
 
   return (
     <>

@@ -1,14 +1,16 @@
 import { TextField, Button, Grid, Typography } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { editPost, setAlertMessage, setAlertStatus } from "../../redux/reducers/blogReducers";
 import CloseIcon from "@mui/icons-material/Close";
 import { tileToEdit } from "../../redux/reducers/tileReducers";
+import { useNavigate } from "react-router-dom";
 
-const EditBlogModal = ({setIsEditModelOpen }) => {
+const EditBlogModal = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const selectedBlog = useSelector(state=>state.tileReducer.selectedTile);
 
@@ -42,11 +44,6 @@ const EditBlogModal = ({setIsEditModelOpen }) => {
     toolbar: toolbarOptions,
   };
 
-  const handleCloseBtn = () => {
-    setIsEditModelOpen(false);
-    dispatch(tileToEdit(null));
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
@@ -57,7 +54,7 @@ const EditBlogModal = ({setIsEditModelOpen }) => {
         content: content,
       })
     );
-    setIsEditModelOpen(false);
+    navigate('/');
     dispatch(setAlertStatus(true));
     dispatch(setAlertMessage("Blog Successfully Updated!"));
     setTimeout(()=>{
@@ -65,12 +62,13 @@ const EditBlogModal = ({setIsEditModelOpen }) => {
     },3000);
   };
 
+  useEffect(()=>{
+    document.title="Edit Blog"
+  },[])
+
   return (
     <>
       <div className="w-full p-10 flex justify-center">
-        <button className="absolute right-5 top-5" onClick={handleCloseBtn}>
-          <CloseIcon />
-        </button>
         <Grid container spacing={4}>
           <Grid item xs={12} sm={12} md={12} lg={12}>
             <Typography variant="h3" gutterBottom sx={{ textAlign: "center" }}>
