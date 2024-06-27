@@ -87,8 +87,8 @@ const HomePage = () => {
             }
           </Paper>
 
-          <Paper className="p-4 flex items-center justify-evenly">
-            <FormControl>
+          <Paper className="filters p-4 flex items-center justify-evenly">
+            <FormControl className="">
               <InputLabel id="demo-simple-select-required-label">
                 Search By Title,Author
               </InputLabel>
