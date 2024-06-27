@@ -13,8 +13,10 @@ const ReadBlog = () => {
   return (
     <>
       <div className="mt-[64px] p-10 flex flex-col text-center items-center">
-        <h1 className="text-3xl">{readTile.title}</h1>
-        <p>{readTile.author}</p>
+        <h1 className="text-4xl mb-2">{readTile.title}</h1>
+        <h2 className="text-lg mb-2">Category - {readTile.category}</h2>
+        <p>Author - {readTile.author}</p>
+        <p className="text-sm">Published on : {readTile.date}</p>
         <div>
         <ReactQuill
         readOnly

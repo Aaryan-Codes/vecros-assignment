@@ -5,6 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { deletePost, setAlertMessage, setAlertStatus } from "../../redux/reducers/blogReducers";
 import { tileToEdit, tileToRead } from "../../redux/reducers/tileReducers";
 import { Link, useNavigate } from "react-router-dom";
+import moment from 'moment';
 // import DOMPurify from 'dompurify';
 
 const BlogTile = ({data}) => {
@@ -16,6 +17,7 @@ const navigate = useNavigate();
   const parser = new DOMParser();
   const htmlFormat = parser.parseFromString(data.content, "text/html");
   const contentText = htmlFormat.body.textContent;
+  const dateFormatting = moment(data.date).format('ll');
 
   const handleEdit = () => {
     dispatch(tileToEdit(data));
@@ -40,19 +42,22 @@ const navigate = useNavigate();
     <>
       <Card
         sx={{
-          width: "340px",
-          height: "220px",
+          width: "440px",
+          height: "240px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           alignItems: "center",
           padding: "12px 8px",
           border:"2px solid #0066ff",
-          borderRadius:"20px"
+          borderRadius:"20px",
         }}
       >
-        <h3 className="text-xl font-bold">{data.title}</h3>
-
+        <h3 className="text-3xl font-bold">{data.title}</h3>
+        <div className="flex gap-8">
+        <p className="font-semibold">{data.category}</p>
+        <p className="text-sm">{dateFormatting}</p>
+        </div>
         <p className="text-sm italic">
           <span className="font-semibold">Author</span> : {data.author}
         </p>

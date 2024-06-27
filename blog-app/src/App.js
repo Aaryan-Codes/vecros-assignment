@@ -7,6 +7,7 @@ import ReadBlog from "./components/Pages/ReadBlog";
 import { CssBaseline, Paper, ThemeProvider, createTheme } from "@mui/material";
 import EditBlogModal from "./components/Pages/EditBlogModal";
 import { useState } from "react";
+import CategoryPage from "./components/Pages/CategoryPage";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -27,6 +28,7 @@ function App() {
                 <Route path="/create-blog" element={<CreateBlog />} />
                 <Route path="/read-blog/:id" element={<ReadBlog />} />
                 <Route path="/edit-blog/:id" element={<EditBlogModal />} />
+                <Route path="/category/:name" element={<CategoryPage/>} />
               </Routes>
             </div>
           </Paper>

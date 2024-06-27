@@ -1,12 +1,23 @@
-import { TextField, Button, Grid, Typography } from "@mui/material";
+import { TextField, Button, Grid, Typography, FormControl, InputLabel, Select, MenuItem, FormHelperText } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { editPost, setAlertMessage, setAlertStatus } from "../../redux/reducers/blogReducers";
-import CloseIcon from "@mui/icons-material/Close";
-import { tileToEdit } from "../../redux/reducers/tileReducers";
 import { useNavigate } from "react-router-dom";
+
+const categoriesItem = [
+  "Technology",
+  "Design",
+  "Culture",
+  "Business",
+  "Politics",
+  "Opinion",
+  "Science",
+  "Health",
+  "Style",
+  "Travel",
+];
 
 const EditBlogModal = () => {
   const dispatch = useDispatch();
@@ -18,6 +29,7 @@ const EditBlogModal = () => {
   const [title, setTitle] = useState(selectedBlog.title);
   const [content, setContent] = useState(selectedBlog.content);
   const [author, setAuthor] = useState(selectedBlog.author);
+  const [category, setCategory] = useState(selectedBlog.category);
 
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike"], // toggled buttons
@@ -49,8 +61,10 @@ const EditBlogModal = () => {
     dispatch(
       editPost({
         id: selectedBlog.id,
+        date: Date.now(),
         title: title,
         author: author,
+        category:category,
         content: content,
       })
     );
@@ -60,6 +74,12 @@ const EditBlogModal = () => {
     setTimeout(()=>{
         dispatch(setAlertStatus(false));
     },3000);
+  };
+
+  const handleCategoryChange = (event) => {
+    let selectedCategory = event.target.value;
+    console.log(selectedCategory);
+    setCategory(selectedCategory);
   };
 
   useEffect(()=>{
@@ -94,6 +114,26 @@ const EditBlogModal = () => {
                     fullWidth
                     required
                   />
+                </Grid>
+
+                <Grid item xs={8}>
+                  <FormControl required sx={{ minWidth: 200 }}>
+                    <InputLabel id="demo-simple-select-required-label">
+                      Category
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-required-label"
+                      id="demo-simple-select-required"
+                      value={category}
+                      label="Category"
+                      onChange={handleCategoryChange}
+                    >
+                      {categoriesItem.map((category) => (
+                        <MenuItem value={category}>{category}</MenuItem>
+                      ))}
+                    </Select>
+                    <FormHelperText>Required</FormHelperText>
+                  </FormControl>
                 </Grid>
 
                 <Grid item xs={12}>
